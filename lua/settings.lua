@@ -1,9 +1,5 @@
 -------------------------------------- globals -----------------------------------------
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
