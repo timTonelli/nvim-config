@@ -4,7 +4,7 @@ return {
 	dependencies = {
 		-- LSP Support
 		{ 'neovim/nvim-lspconfig' }, -- Required
-		{                        -- Optional
+		{                      -- Optional
 			'williamboman/mason.nvim',
 			build = function()
 				pcall(vim.cmd, 'MasonUpdate')
