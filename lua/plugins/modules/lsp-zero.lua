@@ -21,6 +21,7 @@ return {
 		-- Language plugins
 		{ 'simrat39/rust-tools.nvim',         ft = 'rust',             lazy = true },
 		{ 'saecki/crates.nvim',               ft = { 'rust', 'toml' }, lazy = true },
+		{ "rust-lang/rust.vim",               ft = "rust", },
 
 		-- Extras
 		{ 'j-hui/fidget.nvim',                tag = "legacy",          opts = {} },
