@@ -7,44 +7,33 @@ require('lazy').setup({
   'tpope/vim-sleuth',
 
   {
-    'neovim/nvim-lspconfig',
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
     dependencies = {
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
-      { 'j-hui/fidget.nvim',       opts = {} },
-      'folke/neodev.nvim',
+      -- LSP Support
+      { 'neovim/nvim-lspconfig' }, -- Required
+      {                            -- Optional
+        'williamboman/mason.nvim',
+        build = function()
+          pcall(vim.cmd, 'MasonUpdate')
+        end,
+      },
+      { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+
+      -- Autocompletion
+      { 'hrsh7th/nvim-cmp' },     -- Required
+      { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+      { 'L3MON4D3/LuaSnip' },     -- Required
+      { 'rafamadriz/friendly-snippets' },
+
+      -- Language plugins
+      { 'simrat39/rust-tools.nvim',         ft = 'rust',    lazy = true },
+
+      -- Extras
+      { 'j-hui/fidget.nvim',                tag = "legacy", opts = {} },
+      { 'folke/neodev.nvim',                opts = {} },
     },
-    config = require 'plugins.config.lspconfig',
-  },
-
-  {
-    'rust-lang/rust.vim',
-    ft = 'rust',
-    init = function()
-      vim.g.rustfmt_autosave = 1
-    end,
-  },
-
-  {
-    'simrat39/rust-tools.nvim',
-    dependencies = 'neovim/nvim-lspconfig',
-    ft = 'rust',
-    config = require 'plugins.config.rust-tools'
-  },
-
-  {
-    -- Autocompletion
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-      -- Adds LSP completion capabilities
-      'hrsh7th/cmp-nvim-lsp',
-      -- Adds a number of user-friendly snippets
-      'rafamadriz/friendly-snippets',
-    },
-    config = require "plugins.config.nvim-cmp"
+    config = require "plugins.config.lsp-zero"
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -167,6 +156,7 @@ require('lazy').setup({
     },
     config = require "plugins.config.nvim-dap"
   },
+
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -176,12 +166,5 @@ require('lazy').setup({
         -- Configuration here, or leave empty to use defaults
       })
     end
-  },
-  {
-    "rust-lang/rust.vim",
-    ft = "rust",
-    init = function()
-      vim.g.rustfmt_autosave = 1
-    end,
   },
 }, {})
