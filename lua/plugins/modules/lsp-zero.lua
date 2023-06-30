@@ -74,6 +74,7 @@ return {
 			"dockerls",
 			"docker_compose_language_service",
 			"gopls",
+			"rust_analyzer",
 			"pyright",
 			"lua_ls"
 		})
