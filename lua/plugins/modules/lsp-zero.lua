@@ -18,10 +18,13 @@ return {
 		{ 'L3MON4D3/LuaSnip' }, -- Required
 		{ 'rafamadriz/friendly-snippets' },
 
+		-- Language plugins
+		{ 'simrat39/rust-tools.nvim',         ft = 'rust',             lazy = true },
+		{ 'saecki/crates.nvim',               ft = { 'rust', 'toml' }, lazy = true },
+
 		-- Extras
-		{ 'j-hui/fidget.nvim',                tag = "legacy", opts = {} },
+		{ 'j-hui/fidget.nvim',                tag = "legacy",          opts = {} },
 		{ 'folke/neodev.nvim',                opts = {} },
-		{ 'simrat39/rust-tools.nvim',         ft = 'rust',    lazy = true },
 		{ 'jose-elias-alvarez/null-ls.nvim',  ft = 'python' }
 	},
 
@@ -169,6 +172,7 @@ return {
 			sources = {
 				{ name = 'nvim_lsp' },
 				{ name = 'luasnip' },
+				{ name = 'crates' }
 			},
 		}
 	end,
