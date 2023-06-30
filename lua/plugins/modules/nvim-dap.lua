@@ -1,7 +1,5 @@
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
@@ -9,7 +7,8 @@ return {
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
     -- Add your own debuggers here
-    'leoluz/nvim-dap-go',
+    { 'leoluz/nvim-dap-go',           ft = 'go' },
+    { 'mfussenegger/nvim-dap-python', ft = 'python' }
   },
   config = function()
     local dap = require 'dap'
@@ -26,6 +25,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'debugpy'
       },
     }
 
@@ -67,7 +67,11 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    -- Install golang specific config
+    -- Go DAP Config
     require('dap-go').setup()
+
+    -- Python DAP Config
+    local path = '~/.local/share/nvim/mason/packages/debugpy/venv/bin/python'
+    require('dap-python').setup(path)
   end
 }
