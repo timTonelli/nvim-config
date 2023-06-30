@@ -22,10 +22,11 @@ return {
 		{ 'j-hui/fidget.nvim',                tag = "legacy", opts = {} },
 		{ 'folke/neodev.nvim',                opts = {} },
 		{ 'simrat39/rust-tools.nvim',         ft = 'rust',    lazy = true },
+		{ 'jose-elias-alvarez/null-ls.nvim',  ft = 'python' }
 	},
 
 	config = function()
-		require("mason").setup({})
+		require("mason").setup()
 		require('mason-lspconfig').setup()
 
 		local on_attach = function(_, bufnr)
@@ -62,22 +63,17 @@ return {
 		-- LSP setup
 		local lsp = require("lsp-zero").preset({})
 
-		lsp.ensure_installed = {
+		lsp.ensure_installed({
 			"tsserver",
 			"tailwindcss",
 			"astro",
-			-- "eslint",
-			-- "prettuer",
+			"eslint",
 			"dockerls",
 			"docker_compose_language_service",
-			"rust-analyzer",
 			"gopls",
-			-- "pyright",
-			-- "ruff",
-			-- "black",
-			-- "mypy",
+			"pyright",
 			"lua_ls"
-		}
+		})
 
 		require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 		require("neodev").setup({})
@@ -96,7 +92,7 @@ return {
 				['rust_analyzer'] = { 'rust' },
 				-- if you have a working setup with null-ls
 				-- you can specify filetypes it can format.
-				-- ['null-ls'] = {'javascript', 'typescript'},
+				['null-ls'] = { 'javascript', 'typescript', 'python' },
 			}
 		})
 
@@ -105,6 +101,27 @@ return {
 		require('rust-tools').setup({
 			server = {
 				on_attach = on_attach
+			}
+		})
+
+		require('crates').setup({
+			null_ls = {
+				enabled = true,
+				name = "crates.nvim",
+			}
+		})
+
+		local null_ls = require('null-ls')
+		null_ls.setup({
+			sources = {
+				-- TypeScript
+				null_ls.builtins.formatting.prettier,
+				null_ls.builtins.diagnostics.eslint,
+
+				-- Python
+				null_ls.builtins.diagnostics.mypy,
+				null_ls.builtins.diagnostics.ruff,
+				null_ls.builtins.formatting.black,
 			}
 		})
 
