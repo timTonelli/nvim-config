@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 	{ import = 'plugins.modules' },
+	{ import = 'plugins.modules.lsp' }
 }
 
 -- Install plugin modules
