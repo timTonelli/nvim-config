@@ -7,7 +7,6 @@ return {
     config = function()
         require("nvim-treesitter.configs").setup({
             ensure_installed = {
-                -- typescript stuff
                 "typescript",
                 "tsx",
                 "jsdoc",
@@ -17,35 +16,24 @@ return {
                 "htmldjango",
                 "css",
                 "scss",
-
                 "lua",
                 "luadoc",
-
                 "python",
-
                 "rust",
-
                 "go",
                 "templ",
-
                 "sql",
-
                 "dockerfile",
-                "yaml",
-                "hcl",
-                "terraform",
-
-                -- nvim config stuff
+                -- "yaml",
+                -- "hcl",
+                -- "terraform",
                 "vimdoc",
                 "vim",
             },
 
             auto_install = false,
             highlight = { enable = true },
-            indent = {
-                enable = true,
-                disable = { "python" },
-            },
+            indent = { enable = true },
             incremental_selection = {
                 enable = true,
                 keymaps = {
