@@ -17,7 +17,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- LSP Related Keybinds
 vim.api.nvim_create_autocmd("LspAttach", {
-    desc = "LSP Related Keybinds",
+    group = vim.api.nvim_create_augroup("LspKeybinds", { clear = true }),
     callback = function(event)
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = event.buf, desc = "[R]e[n]ame" })
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = event.buf, desc = "[C]ode [A]ction" })
