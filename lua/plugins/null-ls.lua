@@ -13,13 +13,12 @@ return {
         local code_actions = null_ls.builtins.code_actions
 
         local sources = {
-            --[[ formatters ]]
-            formatting.prettierd.with({ extra_filetypes = { "astro" } }), -- js/ts
+            -- formatters
+            formatting.prettier.with({ extra_filetypes = { "astro" } }), -- js/ts
             formatting.stylua, -- lua
             formatting.black, -- python
-            -- formatting.djhtml, -- html jinja templates
 
-            --[[ diagnostics ]]
+            -- diagnostics
             diagnostics.eslint_d.with({
                 -- TODO: should this condition be here?
                 condition = function(utils)
@@ -28,7 +27,7 @@ return {
             }),
             diagnostics.ruff, -- python
 
-            --[[ code actions ]]
+            -- code actions
             code_actions.eslint_d.with({
                 -- TODO: should this condition be here?
                 condition = function(utils)
