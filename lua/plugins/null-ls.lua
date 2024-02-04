@@ -60,6 +60,7 @@ return {
             root_dir = null_ls_utils.root_pattern("Cargo.toml", "go.mod", "package.json", "pyproject.toml", ".null-ls-root", "Makefile", ".git"),
             sources = sources,
             on_attach = on_attach,
+            border = "rounded",
         })
     end,
 }

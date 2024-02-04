@@ -26,6 +26,10 @@ return {
             ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
         }
 
+        vim.diagnostic.config({
+            float = { border = "rounded" },
+        })
+
         local mason_lspconfig = require("mason-lspconfig")
         mason_lspconfig.setup_handlers({
             -- Default handler for all servers
