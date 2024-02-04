@@ -22,7 +22,6 @@ return {
             -- list of servers for mason to install
             ensure_installed = {
                 "lua_ls",
-                "rust_analyzer",
                 "gopls",
                 "tsserver",
                 "astro",
@@ -39,7 +38,8 @@ return {
             ensure_installed = {
                 --[[ formatters ]]
                 "gofmt", -- go
-                "prettierd", -- ts/js
+                -- "prettierd", -- ts/js
+                "prettier", -- ts/js
                 "djhtml", -- html jinja template
                 "black", -- python
                 "stylua", -- lua
