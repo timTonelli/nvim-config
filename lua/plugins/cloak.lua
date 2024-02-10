@@ -4,9 +4,12 @@ return {
         require("cloak").setup({
             cloak_character = "*",
             cloak_length = 16,
+            highlight_group = "Comment",
             patterns = {
-                file_pattern = ".env*",
-                cloak_pattern = "=.+",
+                {
+                    file_pattern = ".env*",
+                    cloak_pattern = "=.+",
+                },
             },
         })
     end,
