@@ -63,13 +63,5 @@ return {
                 })
             end,
         })
-
-        -- configure typescript server with plugin
-        -- typescript.setup({
-        -- 	server = {
-        -- 		capabilities = lsp_capabilities,
-        -- 		on_attach = on_attach,
-        -- 	},
-        -- })
     end,
 }
