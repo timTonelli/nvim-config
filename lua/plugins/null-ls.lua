@@ -17,6 +17,7 @@ return {
             formatting.prettier.with({ extra_filetypes = { "astro" } }), -- js/ts
             formatting.stylua, -- lua
             formatting.black, -- python
+            formatting.rustfmt, -- rust
 
             -- diagnostics
             diagnostics.eslint_d.with({
