@@ -26,6 +26,46 @@ return {
             ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
         }
 
+        -- LSP Related Keybinds
+        vim.api.nvim_create_autocmd("LspAttach", {
+            group = vim.api.nvim_create_augroup("LspKeybinds", { clear = true }),
+            callback = function(event)
+                vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = event.buf, desc = "[R]e[n]ame" })
+                vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = event.buf, desc = "[C]ode [A]ction" })
+
+                vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = event.buf, desc = "[G]oto [D]efinition" })
+                vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, { buffer = event.buf, desc = "[G]oto [R]eferences" })
+                vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = event.buf, desc = "[G]oto [I]mplementation" })
+                vim.keymap.set("n", "<leader>td", vim.lsp.buf.type_definition, { buffer = event.buf, desc = "[T]ype [D]efinition" })
+                vim.keymap.set("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols, { buffer = event.buf, desc = "[D]ocument [S]ymbols" })
+                vim.keymap.set(
+                    "n",
+                    "<leader>ws",
+                    require("telescope.builtin").lsp_dynamic_workspace_symbols,
+                    { buffer = event.buf, desc = "[W]orkspace [S]ymbols" }
+                )
+
+                vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = event.buf, desc = "Hover Documentation" })
+                vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { buffer = event.buf, desc = "Signature Documentation" })
+
+                local filetype = vim.filetype.match({ buf = event.buf })
+
+                -- python specific keymaps
+                if filetype == "python" then
+                    vim.keymap.set("n", "<leader>nm", 'iif __name__ == "__main__":<CR>', { buffer = event.buf, desc = "if [N]ame == [M]ain" })
+                end
+
+                -- go specific keymaps
+                if filetype == "go" then
+                    vim.keymap.set("n", "<leader>he", "iif err != nil{<CR>", { buffer = event.buf, desc = "[H]andle [E]rror" })
+                end
+            end,
+        })
+
+        vim.diagnostic.config({
+            float = { border = "rounded" },
+        })
+
         local mason_lspconfig = require("mason-lspconfig")
         mason_lspconfig.setup_handlers({
             -- Default handler for all servers
@@ -59,13 +99,5 @@ return {
                 })
             end,
         })
-
-        -- configure typescript server with plugin
-        -- typescript.setup({
-        -- 	server = {
-        -- 		capabilities = lsp_capabilities,
-        -- 		on_attach = on_attach,
-        -- 	},
-        -- })
     end,
 }

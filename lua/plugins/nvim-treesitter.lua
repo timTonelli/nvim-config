@@ -7,11 +7,11 @@ return {
     config = function()
         require("nvim-treesitter.configs").setup({
             ensure_installed = {
+                "javascript",
                 "typescript",
                 "tsx",
                 "jsdoc",
                 "astro",
-                "angular",
                 "html",
                 "htmldjango",
                 "css",
@@ -24,9 +24,6 @@ return {
                 "templ",
                 "sql",
                 "dockerfile",
-                -- "yaml",
-                -- "hcl",
-                -- "terraform",
                 "vimdoc",
                 "vim",
             },
