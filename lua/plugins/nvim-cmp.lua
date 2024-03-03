@@ -2,12 +2,9 @@ return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-        "hrsh7th/cmp-buffer", -- source for text in buffer
-        "hrsh7th/cmp-path", -- source for file system paths
         "hrsh7th/cmp-nvim-lsp",
-        "L3MON4D3/LuaSnip", -- snippet engine
+        "L3MON4D3/LuaSnip",         -- snippet engine
         "saadparwaiz1/cmp_luasnip", -- for autocompletion
-        "rafamadriz/friendly-snippets", -- useful snippets
     },
     config = function()
         local cmp = require("cmp")
@@ -33,10 +30,10 @@ return {
                 ["<C-u>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-d>"] = cmp.mapping.scroll_docs(4),
                 ["<C-Space>"] = cmp.mapping.complete({}),
-                ["<CR>"] = cmp.mapping.confirm({
-                    behavior = cmp.ConfirmBehavior.Replace,
-                    select = true,
-                }),
+                -- ["<CR>"] = cmp.mapping.confirm({
+                --     behavior = cmp.ConfirmBehavior.Replace,
+                --     select = true,
+                -- }),
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
@@ -58,10 +55,8 @@ return {
             }),
             sources = {
                 { name = "nvim_lsp" }, -- lsp
-                { name = "crates" }, -- rust crates
-                { name = "luasnip" }, -- snippets
-                -- { name = "buffer" }, -- text within current buffer
-                -- { name = "path" }, -- file system paths
+                { name = "crates" },   -- rust crates
+                { name = "luasnip" },  -- snippets
             },
         })
     end,
