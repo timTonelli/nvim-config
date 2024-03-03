@@ -2,6 +2,7 @@ return {
     "nvimtools/none-ls.nvim", -- configure formatters & linters
     dependencies = {
         "nvim-lua/plenary.nvim",
+        "nvimtools/none-ls-extras.nvim",
     },
     event = { "BufReadPre", "BufNewFile" },
     config = function()
@@ -14,22 +15,22 @@ return {
 
         local sources = {
             -- formatters
-            formatting.prettier.with({ extra_filetypes = { "astro" } }), -- js/ts
-            formatting.stylua, -- lua
-            formatting.black, -- python
-            formatting.rustfmt, -- rust
+            formatting.prettier.with({ extra_filetypes = { "astro" } }),
+            formatting.stylua,
+            formatting.black,
+            require("none-ls.formatting.rustfmt"),
 
             -- diagnostics
-            diagnostics.eslint_d.with({
+            require("none-ls.diagnostics.eslint_d").with({
                 -- TODO: should this condition be here?
                 condition = function(utils)
                     return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
                 end,
             }),
-            diagnostics.ruff, -- python
+            require("none-ls.diagnostics.ruff"), -- python
 
             -- code actions
-            code_actions.eslint_d.with({
+            require("none-ls.code_actions.eslint_d").with({
                 -- TODO: should this condition be here?
                 condition = function(utils)
                     return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
@@ -58,7 +59,8 @@ return {
         end
 
         null_ls.setup({
-            root_dir = null_ls_utils.root_pattern("Cargo.toml", "go.mod", "package.json", "pyproject.toml", ".null-ls-root", "Makefile", ".git"),
+            root_dir = null_ls_utils.root_pattern("Cargo.toml", "go.mod", "package.json", "pyproject.toml",
+                ".null-ls-root", "Makefile", ".git"),
             sources = sources,
             on_attach = on_attach,
             border = "rounded",
