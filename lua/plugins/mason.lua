@@ -37,16 +37,15 @@ return {
         mason_null_ls.setup({
             ensure_installed = {
                 --[[ formatters ]]
-                "gofmt", -- go
-                -- "prettierd", -- ts/js
-                "prettier", -- ts/js
-                "djhtml", -- html jinja template
-                "black", -- python
-                "stylua", -- lua
+                "gofmt",
+                "prettier",
+                "djhtml",
+                "black",
+                "stylua",
 
                 --[[ linters/code action tools ]]
-                "eslint_d", -- ts/js
-                "ruff", -- python
+                "eslint_d",
+                "ruff",
             },
             automatic_installation = false,
         })

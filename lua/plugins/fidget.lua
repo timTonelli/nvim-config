@@ -1,5 +1,13 @@
 return {
     "j-hui/fidget.nvim",
-    event = "LspAttach",
-    opts = {},
+    tag = "v1.4.0",
+    opts = {
+        progress = {
+            display = {
+                overrides = { -- Override options from the default notification config
+                    rust_analyzer = { name = "rust-analyzer" },
+                },
+            },
+        },
+    },
 }
